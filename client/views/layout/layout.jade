@@ -1,14 +1,5 @@
 template(name='layout')
   head
   body
-    nav.navbar.navbar-default
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href='/') MtG Deckbuilding
-        .collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li#nav-decks
-              a(href='/decks') Decks
-            li#nav-cards
-              a(href='/cards') Cards
+    +navbar
     +yield

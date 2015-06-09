@@ -1,6 +1,8 @@
 Router.map ->
   @route 'indexCards',
-    path: 'cards',
+    path: 'cards'
     waitOn: -> [
       Meteor.subscribe 'cards'
     ]
+  @route 'indexDecks',
+    path: 'decks'
