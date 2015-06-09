@@ -1,3 +1,5 @@
 Template.indexCards.helpers
-  cardsByPackage: (package)->
-    Cards.find({ code: package })
+  cards: ->
+    Cards.find()
+  cardsByCode: (code)->
+    Cards.find code: code

@@ -1,7 +1,4 @@
 template(name='indexCards')
   h3 List of cards
-  each Cards.find()
-    li
-      span.name=name
-      br
-      img(src=imageUrl)
+  each cards
+    +card
