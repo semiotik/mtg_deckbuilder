@@ -32,6 +32,7 @@ iron:url@1.0.7
 jquery@1.11.3_2
 json@1.0.3
 launch-screen@1.0.2
+less@1.0.14
 livedata@1.0.13
 logging@1.0.7
 matthew:foundation5-sass@1.0.0
@@ -43,6 +44,8 @@ mobile-status-bar@1.0.3
 mongo@1.1.0
 mquandalle:jade@0.4.3
 mquandalle:jade-compiler@0.4.3
+nemo64:bootstrap@3.3.4_2
+nemo64:bootstrap-data@3.3.4_1
 observe-sequence@1.0.6
 ordered-dict@1.0.3
 random@1.0.3
