@@ -1,4 +1,7 @@
 template(name='indexCards')
-  h3 List of cards
-  each cards
-    +card
+  .container-fluid
+    h2 List of cards
+    ul.list-group
+      each cards
+        +card
+  #card-image-view

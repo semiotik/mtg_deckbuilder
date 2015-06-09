@@ -6,5 +6,5 @@ template(name='navbar')
       .collapse.navbar-collapse
         ul.nav.navbar-nav
           each pages
-            li(class="{{isActivePath path}}")
+            li(class="{{isActivePath path}} text-capitalize")
               a(href=path)=name

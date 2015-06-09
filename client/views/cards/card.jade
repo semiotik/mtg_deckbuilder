@@ -1,5 +1,4 @@
 template(name='card')
-  li
-    span.name=name
-    br
-    img(src=imageUrl)
+  li.list-group-item.card
+    a.card-name=name
+    img.card-image(src=imageUrl)

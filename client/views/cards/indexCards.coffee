@@ -1,5 +1,3 @@
 Template.indexCards.helpers
-  cards: ->
-    Cards.find()
-  cardsByCode: (code)->
-    Cards.find code: code
+  cards: (options = {})->
+    Cards.find(options)
