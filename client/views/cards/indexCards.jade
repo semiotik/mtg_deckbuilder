@@ -1,7 +1,7 @@
 template(name='indexCards')
-  .container-fluid
+  .container-fluid.center
     h2 List of cards
-    ul.list-group
+    ul.list-group.card-list
       each cards
-        +card
-  #card-image-view
+        +cardListItem
+  #card-wrapper

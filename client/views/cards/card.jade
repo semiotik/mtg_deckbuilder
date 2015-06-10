@@ -1,4 +1,11 @@
 template(name='card')
-  li.list-group-item.card
-    a.card-name=name
-    img.card-image(src=imageUrl)
+  img.card-image(src=imageUrl)
+  .card-actions
+    +counterInput
+    .btn-group
+      button.btn.btn-default.dropdown-toggle.add-to-deck(type='button' data-toggle='dropdown' aria-expanded='false')
+        ="Add to deck"
+        span.caret
+      ul.dropdown-menu(role='menu')
+        li
+          a(href='#') Deck One

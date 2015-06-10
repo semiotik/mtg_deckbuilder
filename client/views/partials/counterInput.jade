@@ -1,0 +1,9 @@
+template(name='counterInput')
+  .input-group.counter-input
+    span.input-group-btn
+      button.btn.btn-default.btn-number(type='button' disabled='disabled' data-type='minus' data-field='number')
+        span.glyphicon.glyphicon-minus
+    input.form-control.input-number(type='text' name='number' value='1' min='1' max='40')
+    span.input-group-btn
+      button.btn.btn-default.btn-number(type='button' data-type='plus' data-field='number')
+        span.glyphicon.glyphicon-plus
