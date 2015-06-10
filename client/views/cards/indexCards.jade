@@ -1,5 +1,9 @@
 template(name='indexCards')
   .container-fluid.center
+    select.type-select
+      option All
+      each types
+        option(value=this)=this
     h2 List of cards
     ul.list-group.card-list
       each cards
