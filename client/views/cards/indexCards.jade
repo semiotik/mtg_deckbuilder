@@ -1,11 +1,31 @@
 template(name='indexCards')
-  .container-fluid.center
-    select.type-select
-      option All
-      each types
-        option(value=this)=this
+  .container-fluid
     h2 List of cards
+
+    select.sort-select
+      option(value='name') Name
+      option(value='cmc') Mana
+      option(value='type') Type
+      option(value='colors') Colors
+    .type-checkboxes
+      each types
+        .checkbox
+          label
+            input(type='checkbox' value=this)
+            =this
+    .color-checkboxes
+      each colors
+        .checkbox
+          label
+            input(type='checkbox' value=this)
+            =this
+      .checkbox
+        label
+          input(type='checkbox' value='empty')
+          ="Empty"
+    
     ul.list-group.card-list
       each cards
         +cardListItem
+  
   #card-wrapper

@@ -1,6 +1,6 @@
 @Schemas = {}
 Schemas.Card = new SimpleSchema
-  layout:
+  name:
     type: String
   type:
     type: String
@@ -17,8 +17,12 @@ Schemas.Card = new SimpleSchema
     optional: true
   multiverseid:
     type: Number
-  name:
+  manaCost:
     type: String
+    optional: true
+  cmc:
+    type: Number
+    optional: true
   rarity:
     type: String
   artist:
@@ -26,6 +30,8 @@ Schemas.Card = new SimpleSchema
   text:
     type: String
     optional: true
+  code:
+    type: String
   number:
     type: String
   imageName:
@@ -42,16 +48,13 @@ Schemas.Card = new SimpleSchema
   flavor:
     type: String
     optional: true
-  cmc:
-    type: Number
-    optional: true
   loyalty:
     type: Number
     optional: true
   starter:
     type: Boolean
     optional: true
-  code:
+  layout:
     type: String
 Schemas.Deck = new SimpleSchema
   name:
