@@ -1,39 +1,32 @@
 typesFilter = new Blaze.ReactiveVar([])
 colorsFilter = new Blaze.ReactiveVar([])
 cardsSort = new Blaze.ReactiveVar([['name', 1]])
-
-createOrCondition = (key, values)->
-  unless values.length == 0
-    data = for value in values
-      param = {}
-      param[key] = value
-      if key == 'colors' && value == 'empty'
-        param[key] = {$exists: false}
-      param
-    {$or: data}
-
-filterOptions = ->
-  types = createOrCondition('types', typesFilter.get())
-  colors = createOrCondition('colors', colorsFilter.get())
-  if types && colors
-    options = {$and: [types, colors]}
-  else
-    types || colors || {}
+types = new Blaze.ReactiveVar([])
+colors = new Blaze.ReactiveVar([])
 
 updateCardsSort = (key)->
   options = [[key, 1]]
   options.push(['name', 1]) unless key == 'name'
   cardsSort.set(options)
 
+Template.indexCards.onCreated ->
+  Meteor.call 'getCardTypes', (error, result)->
+    types.set(result)
+  Meteor.call 'getCardColors', (error, result)->
+    colors.set(result)
+  @autorun =>
+    options =
+      types: typesFilter.get()
+      colors: colorsFilter.get()
+    @subscribe 'cards', options
+
 Template.indexCards.helpers
   cards: ->
-    Cards.find(filterOptions(), {sort: cardsSort.get()})
+    Cards.find {}, sort: cardsSort.get()
   types: ->
-    rawTypes = Cards.find().fetch()
-    _(rawTypes).chain().pluck('types').flatten().uniq().value().sort()
+    types.get()
   colors: ->
-    rawColors = Cards.find(colors: {$exists: true}).fetch()
-    _(rawColors).chain().pluck('colors').flatten().uniq().value().sort()
+    colors.get()
 
 Template.indexCards.events
   'change .sort-select': (e)->
@@ -44,5 +37,5 @@ Template.indexCards.events
     typesFilter.set(values)
   'change .color-checkboxes input': (e)->
     values = for input in $('.color-checkboxes input:checked')
-      input.value
+      if input.value == '' then null else input.value
     colorsFilter.set(values)
