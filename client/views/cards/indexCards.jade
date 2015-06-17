@@ -1,29 +1,43 @@
 template(name='indexCards')
-  .container-fluid
+  .container-fluid.index-cards-head
     h2 List of cards
-
-    select.sort-select
-      option(value='name') Name
-      option(value='cmc') Mana
-      option(value='type') Type
-      option(value='colors') Colors
-    .type-checkboxes
-      each types
-        .checkbox
-          label
-            input(type='checkbox' value=this)
-            =this
-    .color-checkboxes
-      each colors
-        .checkbox
-          label
-            input(type='checkbox' value=this)
-            =this
-      .checkbox
-        label
-          input(type='checkbox' value='')
-          ="Empty"
-    
+    a.btn.btn-success(role='button' data-toggle='collapse' data-target='#card-filters' aria-controls='card-filters')
+      ='Filters'
+      span.caret
+    .form-inline.collapse#card-filters
+      .form-group
+        h4 Types
+        .type-checkboxes
+          each types
+            .checkbox
+              label
+                input(type='checkbox' value=this)
+                =this
+      .form-group
+        h4 Colors
+        .color-checkboxes
+          each colors
+            .checkbox
+              label
+                input(type='checkbox' value=this)
+                =this
+          .checkbox
+            label
+              input(type='checkbox' value='')
+              =" Empty"
+      .form-group
+        h4 Sorting
+        select.sort-select
+          option(value='name') Name
+          option(value='cmc') Mana
+          option(value='type') Type
+          option(value='colors') Colors
+        h4 Set
+        select.set-select
+          option(value='') All
+          each sets
+            option(value=this)=this
+  .container-fluid.card-list-container
     ul.list-group.card-list
       each cards
         +cardListItem

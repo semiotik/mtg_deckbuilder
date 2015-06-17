@@ -7,3 +7,5 @@ Meteor.methods
     fetchValues(Cards.find(), 'types')
   getCardColors: ->
     fetchValues(Cards.find(colors: {$exists: true}), 'colors')
+  getCardSets: ->
+    fetchValues(Cards.find(), 'code')

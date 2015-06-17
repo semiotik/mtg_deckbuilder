@@ -1,11 +1,13 @@
-buildQuery = (types, colors)->
-  typesQuery = {types: {$in: types}} if types.length
-  colorsQuery = {colors: {$in: colors}} if colors.length
+buildQuery = (options)->
+  typesQuery = {types: {$in: options.types}} if options.types.length
+  colorsQuery = {colors: {$in: options.colors}} if options.colors.length
   if typesQuery && colorsQuery
-    {$and: [typesQuery, colorsQuery]}
+    query = {$and: [typesQuery, colorsQuery]}
   else
-    typesQuery || colorsQuery || {}
+    query = typesQuery || colorsQuery || {}
+  query['code'] = options.cardSet if options.cardSet
+  query
 
 Meteor.publish 'cards', (options)->
-  query = buildQuery options.types, options.colors
+  query = buildQuery options
   Cards.find query
