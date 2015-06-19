@@ -3,9 +3,7 @@ fetchValues = (collection, field)->
   _(rawValues).chain().pluck(field).flatten().uniq().value().sort()
 
 Meteor.methods
-  getCardTypes: ->
-    fetchValues(Cards.find(), 'types')
-  getCardColors: ->
-    fetchValues(Cards.find(colors: {$exists: true}), 'colors')
-  getCardSets: ->
-    fetchValues(Cards.find(), 'code')
+  getCardValues: ->
+    types: fetchValues(Cards.find(), 'types')
+    colors: fetchValues(Cards.find(colors: {$exists: true}), 'colors')
+    sets: fetchValues(Cards.find(), 'code')

@@ -56,8 +56,13 @@ Schemas.Card = new SimpleSchema
     optional: true
   layout:
     type: String
+  library_ids:
+    type: [Number]
+  deck_ids:
+    type: [Number]
+Schemas.Library = new SimpleSchema
+  name:
+    type: String
 Schemas.Deck = new SimpleSchema
   name:
     type: String
-  cards:
-    type: [Schemas.Card]

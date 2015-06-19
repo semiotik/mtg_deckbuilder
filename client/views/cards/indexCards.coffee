@@ -12,12 +12,10 @@ updateCardsSort = (key)->
   cardsSort.set(options)
 
 Template.indexCards.onCreated ->
-  Meteor.call 'getCardTypes', (error, result)->
-    types.set(result)
-  Meteor.call 'getCardColors', (error, result)->
-    colors.set(result)
-  Meteor.call 'getCardSets', (error, result)->
-    sets.set(result)
+  Meteor.call 'getCardValues', (error, result)->
+    types.set result.types
+    colors.set result.colors
+    sets.set result.sets
   @autorun =>
     options =
       types: typesFilter.get()
@@ -36,8 +34,6 @@ Template.indexCards.helpers
     sets.get()
 
 Template.indexCards.events
-  'change .sort-select': (e)->
-    updateCardsSort e.currentTarget.value
   'change .type-checkboxes input': (e)->
     values = for input in $('.type-checkboxes input:checked')
       input.value
@@ -46,6 +42,8 @@ Template.indexCards.events
     values = for input in $('.color-checkboxes input:checked')
       if input.value == '' then null else input.value
     colorsFilter.set(values)
+  'change .sort-select': (e)->
+    updateCardsSort e.currentTarget.value
   'change .set-select': (e)->
     value = if e.currentTarget.value == '' then null else e.currentTarget.value
     cardsSet.set(value)

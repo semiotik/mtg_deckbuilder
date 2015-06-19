@@ -2,6 +2,10 @@ template(name='card')
   img.card-image(src=imageUrl)
   .card-actions
     +counterInput
+    button.btn.btn-default.add-to-mine
+      ="Mine"
+      span.glyphicon.glyphicon-ok
+    br
     .btn-group
       button.btn.btn-default.dropdown-toggle.add-to-deck(type='button' data-toggle='dropdown' aria-expanded='false')
         ="Add to deck"
