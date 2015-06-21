@@ -37,6 +37,11 @@ template(name='indexCards')
           option(value='') All
           each sets
             option(value=this)=this
+        h4 Library
+        select.library-select
+          option(value='') All
+          each libraries
+            option(value=this._id)=this.name
   .container-fluid.card-list-container
     ul.list-group.card-list
       each cards

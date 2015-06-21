@@ -2,6 +2,7 @@ typesFilter = new Blaze.ReactiveVar([])
 colorsFilter = new Blaze.ReactiveVar([])
 cardsSort = new Blaze.ReactiveVar([['name', 1]])
 cardsSet = new Blaze.ReactiveVar(null)
+cardsLibrary = new Blaze.ReactiveVar(null)
 types = new Blaze.ReactiveVar([])
 colors = new Blaze.ReactiveVar([])
 sets = new Blaze.ReactiveVar([])
@@ -20,7 +21,8 @@ Template.indexCards.onCreated ->
     options =
       types: typesFilter.get()
       colors: colorsFilter.get()
-      cardSet: cardsSet.get()
+      cardsSet: cardsSet.get()
+      cardsLibrary: cardsLibrary.get()
     @subscribe 'cards', options
     @subscribe 'libraries'
 
@@ -33,6 +35,8 @@ Template.indexCards.helpers
     colors.get()
   sets: ->
     sets.get()
+  libraries: ->
+    Libraries.find()
 
 Template.indexCards.events
   'change .type-checkboxes input': (e)->
@@ -46,8 +50,9 @@ Template.indexCards.events
   'change .sort-select': (e)->
     updateCardsSort e.currentTarget.value
   'change .set-select': (e)->
-    value = if e.currentTarget.value == '' then null else e.currentTarget.value
-    cardsSet.set(value)
+    cardsSet.set(e.currentTarget.value)
+  'change .library-select': (e)->
+    cardsLibrary.set(e.currentTarget.value)
   'click .add-to-mine': (e)->
     amount = parseInt $('.counter-input input').val()
     Meteor.call('addCardToLibrary', @_id, amount)
