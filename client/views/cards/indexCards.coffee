@@ -22,6 +22,7 @@ Template.indexCards.onCreated ->
       colors: colorsFilter.get()
       cardSet: cardsSet.get()
     @subscribe 'cards', options
+    @subscribe 'libraries'
 
 Template.indexCards.helpers
   cards: ->
@@ -48,5 +49,8 @@ Template.indexCards.events
     value = if e.currentTarget.value == '' then null else e.currentTarget.value
     cardsSet.set(value)
   'click .add-to-mine': (e)->
-    counter = $('.counter-input input')
-    amount = parseInt counter.val()
+    amount = parseInt $('.counter-input input').val()
+    Meteor.call('addCardToLibrary', @_id, amount)
+  'click .remove-card': (e)->
+    e.stopPropagation()
+    Meteor.call('substractCardFromLibrary', @_id)

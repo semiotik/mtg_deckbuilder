@@ -3,8 +3,9 @@ template(name='card')
   .card-actions
     +counterInput
     button.btn.btn-default.add-to-mine
-      if amount
-        span.btn-title=amountInLibrary
+      if amountInLibrary
+        span.glyphicon.glyphicon-minus.remove-card
+        span.btn-title.card-amount=amountInLibrary
         span.glyphicon.glyphicon-ok
       else
         span.btn-title Add to mine
