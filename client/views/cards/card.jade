@@ -3,8 +3,12 @@ template(name='card')
   .card-actions
     +counterInput
     button.btn.btn-default.add-to-mine
-      ="Mine"
-      span.glyphicon.glyphicon-ok
+      if amount
+        span.btn-title=amountInLibrary
+        span.glyphicon.glyphicon-ok
+      else
+        span.btn-title Add to mine
+        span.glyphicon.glyphicon-ok.hidden
     br
     .btn-group
       button.btn.btn-default.dropdown-toggle.add-to-deck(type='button' data-toggle='dropdown' aria-expanded='false')

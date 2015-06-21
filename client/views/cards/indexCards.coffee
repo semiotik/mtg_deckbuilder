@@ -47,3 +47,10 @@ Template.indexCards.events
   'change .set-select': (e)->
     value = if e.currentTarget.value == '' then null else e.currentTarget.value
     cardsSet.set(value)
+  'click .add-to-mine': (e)->
+    counter = $('.counter-input input')
+    amount = parseInt counter.val()
+    library_ids = @library_ids || []
+    library_ids.push(1) for [1..amount]
+    Cards.update(@_id, {$set: {library_ids: library_ids}})
+    $(e.currentTarget).find('.glyphicon').removeClass('hidden')

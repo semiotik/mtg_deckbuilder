@@ -58,8 +58,10 @@ Schemas.Card = new SimpleSchema
     type: String
   library_ids:
     type: [Number]
+    defaultValue: []
   deck_ids:
     type: [Number]
+    defaultValue: []
 Schemas.Library = new SimpleSchema
   name:
     type: String
