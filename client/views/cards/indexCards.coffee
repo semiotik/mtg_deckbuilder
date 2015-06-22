@@ -1,7 +1,7 @@
 typesFilter = new Blaze.ReactiveVar([])
 colorsFilter = new Blaze.ReactiveVar([])
 cardsSort = new Blaze.ReactiveVar([['name', 1]])
-cardsSet = new Blaze.ReactiveVar(null)
+cardsSet = new Blaze.ReactiveVar('M15')
 cardsLibrary = new Blaze.ReactiveVar(null)
 keyword = new Blaze.ReactiveVar('')
 types = new Blaze.ReactiveVar([])
@@ -63,5 +63,12 @@ Template.indexCards.events
   'click .remove-card': (e)->
     e.stopPropagation()
     Meteor.call('substractCardFromLibrary', @_id)
-  'click .add-to-deck': (e)->
-    Meteor.call('addCardToDeck', $(e.currentTarget).attr('data-card-id'), @_id)
+  'click .add-to-deck a': (e)->
+    e.stopPropagation()
+    cardId = $(e.currentTarget).closest('.add-to-deck').attr('data-card-id')
+    if Cards.findOne(cardId).freeAmount()
+      Meteor.call('changeAmountInDeck', cardId, @_id)
+  'click .remove-from-deck': (e)->
+    e.stopPropagation()
+    cardId = $(e.currentTarget).closest('.add-to-deck').attr('data-card-id')
+    Meteor.call('changeAmountInDeck', cardId, @_id, -1)

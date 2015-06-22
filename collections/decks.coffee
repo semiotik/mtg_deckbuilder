@@ -5,21 +5,24 @@ Decks.helpers
     _(@cards).pluck('id')
   fullCards: ->
     Cards.find(_id: @cardIds)
-  cardAmountByCardId: (cardId)->
+  cardAmount: (cardId)->
     for card in @cards
       return card.amount if card.id == cardId
+    0
+
 Meteor.methods
   createDeck: (name)->
     Decks.insert({name: name})
   updateDeckName: (id, name)->
     Decks.update(id, {$set: {name: name}})
-  addCardToDeck: (cardId, deckId, amount = 1)->
+  changeAmountInDeck: (cardId, deckId, amount = 1)->
     cards = Decks.findOne(deckId).cards || []
-    foundCard = false
-    for card, i in cards
-      if card.id == cardId
-        cards[i].amount += amount
-        foundCard = true
-        break
-    cards.push {id: cardId, amount: amount} unless foundCard
+    index = i for card, i in cards when card.id == cardId
+    if index?
+      if cards[index].amount <= 1
+        cards.splice(index, 1)
+      else
+        cards[index].amount += amount
+    else
+      cards.push {id: cardId, amount: amount}
     Decks.update(deckId, {$set: {cards: cards}})

@@ -1,7 +1,7 @@
 template(name='card')
   img.card-image(src=imageUrl)
   .card-actions
-    +counterInput
+    //+counterInput
     button.btn.btn-default.add-to-mine
       if amountInLibrary
         span.glyphicon.glyphicon-minus.remove-card
@@ -11,10 +11,15 @@ template(name='card')
         span.btn-title Add to mine
         span.glyphicon.glyphicon-ok.hidden
     br
-    .btn-group
-      button.btn.btn-default.dropdown-toggle.deck-select(type='button' data-toggle='dropdown' aria-expanded='false')
-        ="Add to deck"
-        span.caret
-      ul.dropdown-menu(role='menu')
-        each decks
-          li.add-to-deck(data-card-id="{{../_id}}")=name
+    if amountInLibrary
+      .btn-group
+        button.btn.btn-default.dropdown-toggle.deck-select(type='button' data-toggle='dropdown' aria-expanded='false')
+          ="Add to deck"
+          span.caret
+        ul.dropdown-menu(role='menu')
+          each decks
+            li.add-to-deck(data-card-id="{{../_id}}")
+              a.deck-name=name
+              span.amount-in-deck {{cardAmount ../_id}}
+              if cardAmount ../_id
+                span.glyphicon.glyphicon-minus.remove-from-deck

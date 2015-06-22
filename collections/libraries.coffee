@@ -6,16 +6,16 @@ Libraries.helpers
   fullCards: ->
     Cards.find(_id: @cardIds)
 Meteor.methods
-  addCardToLibrary: (cardId, amount = 1, libraryId = '1')->
+  addCardToLibrary: (cardId, libraryId = '1')->
     library = Libraries.findOne(libraryId)
     cards = library.cards
     foundCard = false
     for card, i in cards
       if card.id == cardId
-        cards[i].amount += amount
+        cards[i].amount += 1
         foundCard = true
         break
-    cards.push {id: cardId, amount: amount} unless foundCard
+    cards.push {id: cardId, amount: 1} unless foundCard
     Libraries.update(libraryId, {$set: {cards: cards}})
   substractCardFromLibrary: (cardId, libraryId = '1')->
     library = Libraries.findOne(libraryId)
