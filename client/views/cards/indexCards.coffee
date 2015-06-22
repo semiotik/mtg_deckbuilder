@@ -58,11 +58,10 @@ Template.indexCards.events
   'change .search': (e)->
     keyword.set(e.currentTarget.value)
   'click .add-to-mine': (e)->
-    amount = parseInt $('.counter-input input').val()
-    Meteor.call('addCardToLibrary', @_id, amount)
+    Meteor.call('changeAmountInLibrary', @_id)
   'click .remove-card': (e)->
     e.stopPropagation()
-    Meteor.call('substractCardFromLibrary', @_id)
+    Meteor.call('changeAmountInLibrary', @_id, -1)
   'click .add-to-deck a': (e)->
     e.stopPropagation()
     cardId = $(e.currentTarget).closest('.add-to-deck').attr('data-card-id')

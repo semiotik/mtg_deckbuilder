@@ -19,10 +19,8 @@ Meteor.methods
     cards = Decks.findOne(deckId).cards || []
     index = i for card, i in cards when card.id == cardId
     if index?
-      if cards[index].amount <= 1
-        cards.splice(index, 1)
-      else
-        cards[index].amount += amount
+      cards[index].amount += amount
+      cards.splice(index, 1) if cards[index].amount < 1
     else
       cards.push {id: cardId, amount: amount}
     Decks.update(deckId, {$set: {cards: cards}})
