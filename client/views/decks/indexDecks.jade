@@ -1,0 +1,9 @@
+template(name='indexDecks')
+  .contatiner-fluid.decks
+    input.create-deck(type='text' placeholder='Create new deck')
+    ul.list-group.deck-list
+      each decks
+        li.list-group-item.deck-list-item
+          span.glyphicon.glyphicon-pencil.edit-deck-name
+          a(href="decks/{{_id}}")=name
+          input.edit-deck-input(type='text' value=name)

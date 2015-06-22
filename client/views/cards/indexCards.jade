@@ -42,6 +42,8 @@ template(name='indexCards')
           option(value='') All
           each libraries
             option(value=this._id)=this.name
+      br
+      input.search(type='text' placeholder=' Text')
   .container-fluid.card-list-container
     ul.list-group.card-list
       each cards

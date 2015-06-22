@@ -7,6 +7,7 @@ buildQuery = (options)->
   if options.cardsLibrary
     cardIds = Libraries.findOne(options.cardsLibrary).cardIds()
     query._id = {$in: cardIds}
+  query.text = new RegExp(options.keyword, 'i')
   query
 
 Meteor.publish 'cards', (options)->

@@ -1,3 +1,3 @@
-Template.card.onCreated ->
-  @autorun =>
-    @subscribe 'libraries'
+Template.card.helpers
+  decks: ->
+    Decks.find()

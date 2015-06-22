@@ -3,6 +3,7 @@ colorsFilter = new Blaze.ReactiveVar([])
 cardsSort = new Blaze.ReactiveVar([['name', 1]])
 cardsSet = new Blaze.ReactiveVar(null)
 cardsLibrary = new Blaze.ReactiveVar(null)
+keyword = new Blaze.ReactiveVar('')
 types = new Blaze.ReactiveVar([])
 colors = new Blaze.ReactiveVar([])
 sets = new Blaze.ReactiveVar([])
@@ -23,8 +24,9 @@ Template.indexCards.onCreated ->
       colors: colorsFilter.get()
       cardsSet: cardsSet.get()
       cardsLibrary: cardsLibrary.get()
+      keyword: keyword.get()
     @subscribe 'cards', options
-    @subscribe 'libraries'
+    @subscribe 'decks'
 
 Template.indexCards.helpers
   cards: ->
@@ -53,9 +55,13 @@ Template.indexCards.events
     cardsSet.set(e.currentTarget.value)
   'change .library-select': (e)->
     cardsLibrary.set(e.currentTarget.value)
+  'change .search': (e)->
+    keyword.set(e.currentTarget.value)
   'click .add-to-mine': (e)->
     amount = parseInt $('.counter-input input').val()
     Meteor.call('addCardToLibrary', @_id, amount)
   'click .remove-card': (e)->
     e.stopPropagation()
     Meteor.call('substractCardFromLibrary', @_id)
+  'click .add-to-deck': (e)->
+    Meteor.call('addCardToDeck', $(e.currentTarget).attr('data-card-id'), @_id)

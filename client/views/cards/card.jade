@@ -12,9 +12,9 @@ template(name='card')
         span.glyphicon.glyphicon-ok.hidden
     br
     .btn-group
-      button.btn.btn-default.dropdown-toggle.add-to-deck(type='button' data-toggle='dropdown' aria-expanded='false')
+      button.btn.btn-default.dropdown-toggle.deck-select(type='button' data-toggle='dropdown' aria-expanded='false')
         ="Add to deck"
         span.caret
       ul.dropdown-menu(role='menu')
-        li
-          a(href='#') Deck One
+        each decks
+          li.add-to-deck(data-card-id="{{../_id}}")=name
