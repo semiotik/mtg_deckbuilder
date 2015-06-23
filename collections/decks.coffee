@@ -4,11 +4,24 @@ Decks.helpers
   cardIds: ->
     _(@cards).pluck('id')
   fullCards: ->
-    Cards.find(_id: @cardIds)
+    Cards.find(_id: $in: @cardIds())
   cardAmount: (cardId)->
     for card in @cards
       return card.amount if card.id == cardId
     0
+  cardsCount: ->
+    sum = 0
+    sum += card.amount for card in @cards
+    {unique: @cards.length, all: sum}
+  manaCurve: ->
+    mana = []
+    for i in [0..6]
+      mana.push 0
+    for card in @fullCards().fetch()
+      break unless card.cmc?
+      value = parseInt(card.cmc)
+      if value > 6 then mana[6] += 1 else mana[value] += 1
+    mana
 
 Meteor.methods
   createDeck: (name)->

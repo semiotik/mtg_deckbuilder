@@ -7,3 +7,4 @@ template(name='indexDecks')
           span.glyphicon.glyphicon-pencil.edit-deck-name
           a(href="decks/{{_id}}")=name
           input.edit-deck-input(type='text' value=name)
+          span.deck-cards-count unique: {{cardsCount.unique}}, all: {{cardsCount.all}}

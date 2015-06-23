@@ -19,3 +19,7 @@ Template.indexDecks.events
     listItem = $(e.currentTarget).closest('.deck-list-item')
     listItem.find('.edit-deck-input').hide()
     listItem.find('a').show()
+  'focusout .edit-deck-input': (e)->
+    listItem = $(e.currentTarget).closest('.deck-list-item')
+    listItem.find('.edit-deck-input').hide()
+    listItem.find('a').show()

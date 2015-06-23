@@ -10,8 +10,7 @@ Router.map ->
   @route 'deckPage',
     path: 'decks/:_id'
     data: ->
-      Decks.findOne()
+      Decks.findOne(@params._id)
     waitOn: ->
       Meteor.subscribe 'deck', @params._id
-      Meteor.subscribe 'deckCards', @params._id
       Meteor.subscribe 'libraries'
