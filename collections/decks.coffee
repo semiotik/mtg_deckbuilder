@@ -11,8 +11,11 @@ Decks.helpers
     0
   cardsCount: ->
     sum = 0
-    sum += card.amount for card in @cards
-    {unique: @cards.length, all: sum}
+    if @cards?
+      sum += card.amount for card in @cards
+      {unique: @cards.length, all: sum}
+    else
+      {unique: 0, all: 0}
   manaCurve: ->
     mana = []
     for i in [0..6]
